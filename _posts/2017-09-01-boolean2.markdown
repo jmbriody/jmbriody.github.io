@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "CDNF Part II: Take the namedtuples boolean"
+title: "CDNF Part II: Take the namedtuples bowling"
 date:   2017-09-01
 categories: python namedtuple boolean_algebra logic
 tags: python namedtuple boolean_algebra logic
