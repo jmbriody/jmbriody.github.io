@@ -1,0 +1,69 @@
+---
+layout: single
+title: "PLCAS: Python List Comprehension Anxiety Syndrome"
+date:   2017-08-01
+categories: python ListComprehension
+tags: python ListComprehension
+---
+
+## PLCAS: Python List Comprehension Anxiety Syndrome
+PLCAS **is** a real disease. The latest DSM (Diagnostic and Statistical Manual of Mental Disorders) was finalized before PLCAS was discovered as a full-blown mental issue. But it should be covered in the next edition.
+
+However, if you think you may suffer from PLCAS you are not alone. There are ways to live with this potentially debilitating disease and most importantly, ways to a cure. 
+
+## TL;DWR -- Too Long; Don't Want to Read
+Trey Hunter's [Python List comprehensions now in color](http://treyhunner.com/2015/12/python-list-comprehensions-now-in-color/) will turn you into a LC pro. Or at least get you on the path to building PLCs (Python List Comprehensions) when you are reviewing your own code. 
+
+My personal suggestion--don't worry about an LC when writing your code if you're happier doing a quick for loop. 
+1. define your list, e.g. `mylist = []`
+2. create a for loop
+3. once the code is working go back and look for all of your `xxxlist = []` and use Hunter's info to change them.
+
+Do that a couple of times and you'll quickly start to stomp out list comprehensions. The reality is they're just a tool--none of us are going to become the Pablo Picasso of list comprehensions. Being able to write and read them is a great skill. Anyway, Pablo Picasso was a bit of an asshole.
+
+Now back to my meandering BS.
+
+### Do I have PLCAS?
+Common symptoms of PLCAS include:
+1. Spending 3 hours trying to write a list comprehension when you could've written the code in a "for" loop in 20 minutes
+2. A constant nagging suspicion that people will dismiss your code because you don't have a list comprehension at least once for every 30 lines of code
+3. Ignoring your loved ones so that you can read every Stack Overflow question that mentions list comprehensions
+
+### First Steps to a Cure
+Again, remember, you are not alone. That said--the first real step is realising you don't need to use list comprehensions. One of the hallmarks of PLCAS is the belief that you are being judged for not using them. This is not true. A readable nested for loop is far better than an obtuse list comprehension. [However, once you are comfortable with them list comprehensions will not only make your code easier to read but will help immensely when looking at other people's code.]
+
+Write the code that makes the most sense to you. A program that is correct is far superior to anything that is "clever" but hard to follow. 
+
+### Available Drugs
+Trey Hunter has the cure. He beautifully explains and breaks down how to create a list comprehension from a for loop. If list comprehensions aren't coming to you naturally write your code in for loops. Then go back and look for short ones that can be "condensed". You will pretty quickly learn how to do a list comprehension. And just as importantly how to grok what is going on in ones in other peoples code.
+
+Even after you're comfortable with list comprehensions and you need to write soemthing that you know is probably doable with an LC--but it just isn't coming to you. Write the "for" loop and move on. "for" loops have existed since the first programming language crawled from the primordial assembly language muck. They are the "learning to walk" of programming. LCs are like learning to ride a bike, drive a car, or swim.
+
+[PLCAS Cure](http://treyhunner.com/2015/12/python-list-comprehensions-now-in-color/)
+
+## A personal example
+This may be a bit of an obtuse example because it somewhat depends on knowing a bit about what the over all program was doing. But for my own code to get things done I wrote . . .
+
+```
+result = []
+
+for x in final_result:
+    temp_item = (sorted(list(x.termset)))
+    result.append("".join(temp_item))
+```
+
+. . . based on Trey Hunter's help I changed it to . . .
+```
+result = ["".join(sorted(temp_item.termset)) for temp_item in final_result]
+```
+And this is a great example of why you shouldn't care. It is possible in this case the list comprehension would be faster--but speed isn't really a concern here. So it comes down to which is quicker for you to write. If you're new to Python it may not be obvious or easy to see how to do a list comprehension using `"".join(zed)`. But getting it down in your code as a simple for loop should make it clearer to figure out how a comprehension can be composed. 
+
+After a few go-rounds with convertering for loops to LCs the relationship between for loops and list comprehensions should start to become second nature. Writing code you'll start to skip the for loop part and just do a LC. Reading code you'll (likely) find list comprehensions make things alot easier to read.
+
+### Final Notes
+Always write code that makes sense to you. Obviously don't be stupid about it but spending hours or days looking for an elegant solution is almost always wasted time if you can spend 25% of that time and get a working piece of code. And that goes for everything--not just list comprehensions. You'll be able to get your code up and running faster and, I hope, you'll also know the areas you want to go back to to improve.
+
+As Donald Knuth said "premature optimization is the root of all evil". Refactoring **is** how applications and systems are written today. Finding ways to optimize your code after you've gotten stuff working is truly a great way to learn more about coding and software development. Worrying about or agonizing over the "perfect solution" whether it is a list comprehension or anything else is usually wasted time--at least until you have "a" solution.
+
+In short "keep coding and carry on".
+
