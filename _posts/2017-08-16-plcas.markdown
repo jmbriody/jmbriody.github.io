@@ -2,6 +2,7 @@
 layout: single
 title: "PLCAS: Python List Comprehension Anxiety Syndrome"
 date:   2017-08-01
+comments:   true
 categories: python ListComprehension
 tags: python ListComprehension
 ---
