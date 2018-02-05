@@ -6,7 +6,7 @@ categories: python setup
 tags: python setup
 ---
 ## So you want to do some Python
-This post is pretty much 100% about how I set up my development environments. There are any number of ways to do it but I've personally found using virtualenv and virtualenvwrapper work well for me. **Major Caveat** I pretty much exclusively use linux--mostly Ubuntu for personal/development and Redhat. My work machine runs Windows--but I run Ubuntu on it in VBox.
+This post is pretty much 100% about how I set up my development environments. There are any number of ways to do it but I've personally found using virtualenv and virtualenvwrapper work well for me. **Major Caveat** I  exclusively use linux--mostly Ubuntu for personal/development and Redhat. My work machine runs Windows--but I run Ubuntu on it in VBox.
 
 So almost all of this is going to be Ubuntu-ish focused. 
 * If you run a different linux and are comfortable with linux already the major differences will likely be how you install "system" software (probably yum vs. apt)
