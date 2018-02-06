@@ -21,13 +21,13 @@ This post is pretty much 100% about how I set up my development environments. Th
 Anyway, this is the set up I use and, for me at least, it makes it easy to work on multiple things and not mess up my OS. 
 
 ### So why?
-There tend to be 2 major reasons why a virtual environment is a really good idea. 
+There are a number of reasons why a virtual environment is a really good idea--3 major ones are . . . 
 
 1. You want to mess around with some python packages/clone some code/toy around with things. 
 2. You want to create code that others can use and know exactly what is required to run the code.
-3. Profit! (Sorry.) Serious reason #3 virtual environments and virtualenvwrapper will make life easier if you bounce from thing to thing or work on a number of different projects.
+3. Profit! (Sorry.) Serious reason #3: virtual environments and virtualenvwrapper will make life easier if you bounce from thing to thing or work on a number of different projects. Hell, it's a really good way to work on the production branch and the development branch of the same project.
 
-For beginners the first case is very important. Virtual Environments let you use any Python version you want and let you pile on any array of extra packages and package versions without polluting your OS'es environment. Randomly adding packages to your OS may not hurt much--but you can break things, and you will almost certainly break things if you just change your OS python from 2.7 to 3.5. Beyond that, lets say you want to mess around with numpy or flask; you find some interesting projects to test out. Then you discover project A wants X version of numpy and project B wants y version. In short, down the road, if your projects are in virtual environments you won't end up trying to figure out what change you made to your system broke something that worked 2 months ago.
+For beginners the first case is very important. Virtual Environments let you use any Python version you want and let you pile on any array of extra packages and package versions without polluting your OS'es environment. Randomly adding packages to your OS **may** not hurt much--but eventually you will break things. Beyond that, lets say you want to mess around with numpy or flask; you find some interesting projects to test out. Then you discover project A wants X version of numpy and project B wants y version. In short, down the road, if your projects are in virtual environments you won't end up trying to figure you broke something that worked 2 months ago.
 
 Second case is sort of the evolution of the first. When you start writing stuff that you want to share you will be able to easily say what exactly is required to run your code. With the right set up, testing suites, and validation you'll even be able to provide a range of environments that your code will work with.
 
