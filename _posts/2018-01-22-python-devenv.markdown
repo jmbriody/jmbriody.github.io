@@ -6,36 +6,32 @@ categories: python setup
 tags: python setup
 ---
 ## So you want to do some Python
-This post is pretty much 100% about how I set up my development environments. There are any number of ways to do it but I've personally found using virtualenv and virtualenvwrapper work well for me. **Major Caveat** I  exclusively use linux--mostly Ubuntu for personal/development and Redhat. My work machine runs Windows--but I run Ubuntu on it in VBox.
+This post is pretty much 100% about how I set up my development environments. There are any number of ways to do it but I've personally found using virtualenv and virtualenvwrapper work well for me. Some major **Notes:**
 
-So almost all of this is going to be Ubuntu-ish focused. 
-* If you run a different linux and are comfortable with linux already the major differences will likely be how you install "system" software (probably yum vs. apt)
-* If you run windows:
-  * Totally new to programming and just want to do Python there are probably better places to find info
-  * Want to learn python **and** learn linux. You'll probably need to really use some google-fu. Both are life-long endeavors, learning both at the same time can be a pain but probably rewarding. 
+1. I mostly use Ubuntu so the examples all use apt-get for the install part. If you're on a different linux with different package manager there will probably be slight changes needed. 
+2. If you're on windows and want to also dive into Linux I have a bit of info on setting up Virtual Box. If you're new to both Linux and Python that is a lot to bite off (see #3)
+3. **Conda/Anaconda/Miniconda** Conda is potentially a really great option to get started with particularly if your python interests are in the numpy/science area. It also may be a really good option if you are doing more "full stack" stuff as Conda bills it self as a more generalized manager. (As opposed to virtual environments that are really only concerned with python.)
 
-If you are running windows I'll briefly touch on how to set up an Ubuntu virtual environment using Oracle's VirtualBox. **But** that simply gets you a linux install running on windows
+**Defense of the Notes above**
 
---------
-Maybe in a different post I'll talk about how to run Ubuntu on a windows machine and do a whirl-wind intro to Linux--but here I'm just going to focus on setting up a Python dev environment. The system related commands (apt-get) are all Ubuntu based; if you run another flavor of linux you may need to translate a bit and use some google-fu. 
+1. On the OS front--python seems to be a great equalizer as it can run on windows, linux and mac. I've used linux for quite a while so I can't help much with Windows focused environments. For linux and macs aside from installation process the config stuff should work.
+2. If you're new to python and no linux experience--jumping into both at the same time will probably lead to a lot of frustration. But will also probably provide a lot of rewards when you get that "thing" to finally work.
+3. Conda: I've never used it but it is, from all appearances, a really good option to get up and running. May be the best option to jump into python if you're new to programming and not familiar with Linux. 
 
 Anyway, this is the set up I use and, for me at least, it makes it easy to work on multiple things and not mess up my OS. 
 
 ### So why?
-There tend to be 2 major reasons why a virtual environment is a really good idea. 1) You want to mess around with some python packages/clone some code/toy around with things. 2) You want to create code that others can use and know exactly what is required to run the code.
+There tend to be 2 major reasons why a virtual environment is a really good idea. 
+
+1. You want to mess around with some python packages/clone some code/toy around with things. 
+2. You want to create code that others can use and know exactly what is required to run the code.
+3. Profit! (Sorry.) Serious reason #3 virtual environments and virtualenvwrapper will make life easier if you bounce from thing to thing or work on a number of different projects.
 
 For beginners the first case is very important. Virtual Environments let you use any Python version you want and let you pile on any array of extra packages and package versions without polluting your OS'es environment. Randomly adding packages to your OS may not hurt much--but you can break things, and you will almost certainly break things if you just change your OS python from 2.7 to 3.5. Beyond that, lets say you want to mess around with numpy or flask; you find some interesting projects to test out. Then you discover project A wants X version of numpy and project B wants y version. In short, down the road, if your projects are in virtual environments you won't end up trying to figure out what change you made to your system broke something that worked 2 months ago.
 
 Second case is sort of the evolution of the first. When you start writing stuff that you want to share you will be able to easily say what exactly is required to run your code. With the right set up, testing suites, and validation you'll even be able to provide a range of environments that your code will work with.
 
-The unmentioned case, which may be the most compelling of all, is that a good virtual environment set up will help you organize your projects and code. 
-
-## Windows Vs. Linux
-Before I get started I'll again mention this is purely Linux focused. I have nothing against windows I just happen to use Linux for most of my work and find it is easier to get the range of tools I need on Linux machines.
-
-* If you don't know linux and don't currently want to dive into that there are much better places to find info for setting up environments. [I'll see if I can find some links--but a decent google search will probably find a world of info.]
-* If you are on Windows and want to try out Linux or are a bit familiar with it I've got a few links below on running Ubuntu in VirtualBox. If you are totally new to Linux this path will be challenging but will probably pay off as a lot of other stuff you may run into like dockers, MySQL/PostGres, etc. tend to be easy to get up and running on Linux.
-* If you run Linux already you're good to go.
+3rd case is the real reason--it will save your sanity. Whether you bounce from topic to topic or have a laser beam like focus on a specific area, managing your code with virtual environments should help you keep your stuff organized. 
 
 #### Detour to VirtualBox
 For the Windows users--VirtualBox is a Cisco Virtual machine that can run a full-blown OS on Windows. It can run just about any flavor of Linux you want, Windows, or even OS X. I'm not going to go into details on the install and setup but two good resources are . . .
@@ -43,7 +39,7 @@ For the Windows users--VirtualBox is a Cisco Virtual machine that can run a full
 * [PsychoCats](http://www.psychocats.net/ubuntu/virtualbox)
 * [https://linus.nci.nih.gov/bdge/installUbuntu.html](https://linus.nci.nih.gov/bdge/installUbuntu.html)
 
-The second seems to be more complete--my notes:
+The second seems to be more complete. My comments:
 
 * Install the guest additions. It will let you map windows directories into your linux directory space **and** let you copy and paste to and from windows. (You are using 2 monitors aren't you?)
 * Don't skimp on disk size. Obviously don't commit your last remaining bit of hard drive to the virtual instance but if you have the disk space do not stick with the default 10 GB--20 or 40 will work well for a while. Resizing can be a pain.
