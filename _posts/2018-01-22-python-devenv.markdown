@@ -6,11 +6,16 @@ categories: python setup
 tags: python setup
 ---
 ## So you want to do some Python
-This post is pretty much 100% about how I set up my development environments. There are any number of ways to do it but I've personally found using virtualenv and virtualenvwrapper work well for me. Some major **Notes:**
+This post is pretty much 100% about how I set up my development environments. One Python tenet is that **There should be one-- and preferably only one --obvious way to do it**--that may or may not work for how various coders doing many different things like to organize and do there work. However, using virtual environments in some form is a commonly accepted practice. Finding a set up that works for you will save you a lot of headaches.
+
+That said, there are any number of ways to do it and this is what works for me. I rely on **python-virtualenv** and **virtualenvwrapper**. There are at least 2 distinct virtualenv tools for python--venv and virtualenv. You could use either one directly but virtualenvwrapper, as its name probably suggests, provides a nice set of "wrapper" functions that simplify daily tasks. [Python Virtual Envs](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+
+Some major **Notes:**
 
 1. I mostly use Ubuntu so the examples all use apt-get for the install part. If you're on a different linux with different package manager there will probably be slight changes needed. 
-2. If you're on windows and want to also dive into Linux I have a bit of info on setting up Virtual Box. If you're new to both Linux and Python that is a lot to bite off (see #3)
+2. If you're on windows and want to also dive into Linux I'd suggest using Virtual Box--you can install a full linux distro and not have to deal with dual booting. If you're learning linux while learning Python you will be frustrated at times--but you'll develop your google-fu and when you solve that nagging problem you can do a little dance.
 3. **Conda/Anaconda/Miniconda** Conda is potentially a really great option to get started with particularly if your python interests are in the numpy/science area. It also may be a really good option if you are doing more "full stack" stuff as Conda bills it self as a more generalized manager. (As opposed to virtual environments that are really only concerned with python.)
+4. I'm a command line/shell junkie
 
 **Defense of the Notes above**
 
@@ -33,43 +38,17 @@ Second case is sort of the evolution of the first. When you start writing stuff 
 
 3rd case is the real reason--it will save your sanity. Whether you bounce from topic to topic or have a laser beam like focus on a specific area, managing your code with virtual environments should help you keep your stuff organized. 
 
-#### Detour to VirtualBox
-For the Windows users--VirtualBox is a Cisco Virtual machine that can run a full-blown OS on Windows. It can run just about any flavor of Linux you want, Windows, or even OS X. I'm not going to go into details on the install and setup but two good resources are . . .
-
-* [PsychoCats](http://www.psychocats.net/ubuntu/virtualbox)
-* [https://linus.nci.nih.gov/bdge/installUbuntu.html](https://linus.nci.nih.gov/bdge/installUbuntu.html)
-
-The second seems to be more complete. My comments:
-
-* Install the guest additions. It will let you map windows directories into your linux directory space **and** let you copy and paste to and from windows. (You are using 2 monitors aren't you?)
-* Don't skimp on disk size. Obviously don't commit your last remaining bit of hard drive to the virtual instance but if you have the disk space do not stick with the default 10 GB--20 or 40 will work well for a while. Resizing can be a pain.
-* Fortunately networking (at least recently) has worked flawlessly for me out of the box. Be thankful for that and also that you don't have to rely on a dual-boot system.
-
-**Some quick Linux tips**
-* Learn shell [short cuts](https://www.skorks.com/2009/09/bash-shortcuts-for-maximum-productivity/)
-  * Tab completion is a god-send. (Type the start of a command and hit tab twice)
-  * Up-arrow for going through recent history
-  * Ctrl-r to search backward through history
-  * There are a ton more but those I use almost constantly
-* Commands:
-  * `history` and `history | grep word` 
-  * [grep](https://linux.die.net/man/1/grep) or `man grep`
-  * `locate` and `tree`: (Install with `apt-get install mlocate tree`). Once locate is installed you'll need to run `sudo updatedb` after that you can search your hard drive for any file with just `locate part-of-file-name`. The `tree` command will display the contents of current sub-directories as a tree--great for getting an idea of how something you just pulled from git is layed out.
-  * Learn `ps` (`ps -awx` is pretty useful); `ls` (`ls -Flh`); `netstat` (`netstat -lpten`); `ifconfig`
-* Find an editor you like
-* Learn how to use `apt-get` and `apt-cache` from the command line for installing and searching for available software
-* **Total Opinion (unlike everything else I say)**: Try cairo-dock: `apt-get install cairo-dock`; reboot; before logging in hit the little gear above the password box and choose Cairo.
 
 ## Installing the dev-env and related items (Back to the main story)
 Well we're going to start off by installing all the stuff you'll need to get started. All of this assumes you're running inside a terminal. Python (probably 2.7) should already be installed. To check just run `python --version`; also check if python3 is installed `python3 --version`. If python3 says something like "command not found" you'll need to run the first apt-get command--if it is installed just run the last two. So run the following commands as root (e.g. first run `sudo su -` to become root) . . . 
 
-`apt-get install python3`
-
-`apt-get install python-virtualenv python-pip python3-virtualenv python3-pip virtualenv`
-
-`apt-get install git gitk ipython3 ipython3-notebook idle3 idle`
-
+```
+apt-get install python3
+apt-get install python-virtualenv python-pip python3-virtualenv python3-pip virtualenv
+apt-get install git gitk ipython3 ipython3-notebook idle3 idle
+```
 After that run the following (still as root):
+
 
 ```
 pip install --upgrade pip
@@ -175,7 +154,9 @@ unset -f cd
 This essentially reverses the items from postactivate. The commented lines would kill the notebook server if you are running it. The uncommented line sets the "cd" command back to normal.
 
 ## . . . and we're done
-So, that is it, virtualenv and virtualenvwrapper are now ready to go. Now, how to use it.
+So, that is it, virtualenv and virtualenvwrapper are now ready to go.
+
+## But wait, there is more . . .
 
 First just type `vw` (we created vw as an alias for the rather long `virtualenvwrapper` command in our .bashrc). It will show you the commands available--most of these are also rather long and you don't need to remember them. Just type `vw` at any time to get the list. You also probably won't be using them a whole lot but they are really useful when you do need them. And when you do, the "TAB" key is your best friend.
 
