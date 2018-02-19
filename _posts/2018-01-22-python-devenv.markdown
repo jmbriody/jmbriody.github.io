@@ -6,70 +6,70 @@ categories: python setup
 tags: python setup
 ---
 ## So you want to do some Python
-This post is pretty much 100% about how I set up my development environments. One Python tenet is that **There should be one-- and preferably only one --obvious way to do it**--that may or may not work for how various coders doing many different things like to organize and do there work. However, using virtual environments in some form is a commonly accepted practice. Finding a set up that works for you will save you a lot of headaches.
+Have you ever searched the web for a recipe, like for Kung Pao Chicken, and the top few links all have like 4.8 stars with 500+ reviews? Then you go to a link and it ends up being 184 pictures with an 18,900 word narrative about cooking Kung Pao chicken and some random stuff about how the family cat helps with the cooking and at the end is a note-card size recipe. I'm not going to do that here--but I think virtual environments require at least a little introduction matter. I'll keep the intro short but the basic plan for this post is . . .
 
-That said, there are any number of ways to do it and this is what works for me. I rely on **python-virtualenv** and **virtualenvwrapper**. There are at least 2 distinct virtualenv tools for python--venv and virtualenv. You could use either one directly but virtualenvwrapper, as its name probably suggests, provides a nice set of "wrapper" functions that simplify daily tasks. [Python Virtual Envs](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+1. Intro--skip or scan if you already know why they are a good idea
+2. Software install--parts will be essentially linux/Ubuntu oriented for OS level items. If you're on a "yum" linux vs. an "apt" or on a different distro there will be minor adjustments needed. Macs will need slightly more adjustments. Windows--I just don't know; more on that in the **Intro**.
+3. Configuration--This is the true **meat and gristle** of the set up. After grokking that using virtual environments is a really good idea getting them setup so you can work with them with minimal effort can be a pain. I hope the config section will show you how to set your stuff up so you can work the way you want to.
+4. Closing crud.
 
-Some major **Notes:**
+## INTRO -- Wherefor art thou virtualenv ##
+If you're reading this I assume you've already been told virtual environments are a good idea. I'd sort of guess that you've also found, after diving in, that some shit just doesn't work right when you do a virtual environment. I am not going to go into any sort of detailed comparison of "venv" vs. "virtualenv" or any of that other stuff. **This is what works for me** and it may be a good starting point to find what works for you.
 
-1. I mostly use Ubuntu so the examples all use apt-get for the install part. If you're on a different linux with different package manager there will probably be slight changes needed. 
-2. If you're on windows and want to also dive into Linux I'd suggest using Virtual Box--you can install a full linux distro and not have to deal with dual booting. If you're learning linux while learning Python you will be frustrated at times--but you'll develop your google-fu and when you solve that nagging problem you can do a little dance.
-3. **Conda/Anaconda/Miniconda** Conda is potentially a really great option to get started with particularly if your python interests are in the numpy/science area. It also may be a really good option if you are doing more "full stack" stuff as Conda bills it self as a more generalized manager. (As opposed to virtual environments that are really only concerned with python.)
-4. I'm a command line/shell junkie
+In a nutshell, as the name may imply, a virtualenv is an enclosed environment--this means you have **better control** of what you are using and also means you are **limited** in what you are using. The **better control** part helps greatly in not only **not** messing up other stuff you work on but also knowing exactly what you are working on. The **limited** part is where we run into issues. Without configuration most software will have no idea that you are running in a virtual environment. 
 
-**Defense of the Notes above**
+#### Details Details -- Why? ####
+There are typically two places things can be installed--this is true for most things but we're focusing on Python . . .
 
-1. On the OS front--python seems to be a great equalizer as it can run on windows, linux and mac. I've used linux for quite a while so I can't help much with Windows focused environments. For linux and macs aside from installation process the config stuff should work.
-2. If you're new to python and no linux experience--jumping into both at the same time will probably lead to a lot of frustration. But will also probably provide a lot of rewards when you get that "thing" to finally work.
-3. Conda: I've never used it but it is, from all appearances, a really good option to get up and running. May be the best option to jump into python if you're new to programming and not familiar with Linux. 
+1. OS level -- this should be where the stuff needed by your system is stored.
+2. Local level -- this is the stuff you as a user want 
 
-Anyway, this is the set up I use and, for me at least, it makes it easy to work on multiple things and not mess up my OS. 
+For python throwing everything into the OS level install will probably cause issues. On Linux managers like "apt" or "yum" tend to try to figure out what will work (not always perfectly--but that is why you should be nice to them). If you throw in "pip" stuff at the OS level you are going outside your OS'es management system and can potentially break things.
 
-### So why?
-There are a number of reasons why a virtual environment is a really good idea--3 major ones are . . . 
+So we have pip "--user". This installs python packages for your specific user. That is a good thing. But we run into a problem here--one day you're working with Foo v. 1.2 the next Foo v. 2.0. Then you end up working with something later that uses Foo v 1.4 and you have no idea why stuff is going wonky.
 
-1. You want to mess around with some python packages/clone some code/toy around with things. 
-2. You want to create code that others can use and know exactly what is required to run the code.
-3. Profit! (Sorry.) Serious reason #3: virtual environments and virtualenvwrapper will make life easier if you bounce from thing to thing or work on a number of different projects. Hell, it's a really good way to work on the production branch and the development branch of the same project.
+We finally end up with virtual environments. When you set up your virtual environment system well you can seemlessly and easily work on Foo 1.2, Foo 1.4, and Foo 2.0 all at the same time (in different shells/windows). On top of that you'll know exactly what you're using--if you install 20 packages at the OS or User level you may not know for sure what you're pulling in. In a virtual environment that sort of thing becomes much simpler.
 
-For beginners the first case is very important. Virtual Environments let you use any Python version you want and let you pile on any array of extra packages and package versions without polluting your OS'es environment. Randomly adding packages to your OS **may** not hurt much--but eventually you will break things. Beyond that, lets say you want to mess around with numpy or flask; you find some interesting projects to test out. Then you discover project A wants X version of numpy and project B wants y version. In short, down the road, if your projects are in virtual environments you won't end up trying to figure you broke something that worked 2 months ago.
+#### The Downside ####
+Typically when you login or even launch your OS'es GUI 2 environments are loaded--the OS (e.g. /usr/bin) and the user stuff (~/bin/). It gets slightly more complicated than that, but, in short, your applications essentially know where to find the stuff they need. Virtual environments throw a twist into the mix. Unless an application figures out it should be working with the virtual environment it ends up using just the OS and user environment. So, we need to do some work to make the applications we want to use in many virtual environments work correctly.
 
-Second case is sort of the evolution of the first. When you start writing stuff that you want to share you will be able to easily say what exactly is required to run your code. With the right set up, testing suites, and validation you'll even be able to provide a range of environments that your code will work with.
+>  Ultimately, once you get a sense of how to make applications work with virtual environments you should start to really understand how they are working and, possibly more importantly, have an idea of how to make other tools work with them.
 
-3rd case is the real reason--it will save your sanity. Whether you bounce from topic to topic or have a laser beam like focus on a specific area, managing your code with virtual environments should help you keep your stuff organized. 
+**Finally**--this is how I set mine up. There are a number of different ways to do environments, but this set up probably isn't that uncommon. There are probably many people who work with "venv" or "virtualenv" directly and there are also even applications/packages like __Anaconda__ that aim to do specific things. I typically work with just plain old python--if you are doing full stack/web dev or more into analytics/science stuff you may find other solutions/options more suitable. Again though, I hope to illustrate at least some of the underlying mechanics with some concrete examples which should translate to almost all virtual environment style setups.
 
+## Software Install (Back to the main story)
+Well we're going to start off by installing all the stuff you'll need to get started. All of this assumes you're running inside a terminal.
 
-## Installing the dev-env and related items (Back to the main story)
-Well we're going to start off by installing all the stuff you'll need to get started. All of this assumes you're running inside a terminal. Python (probably 2.7) should already be installed. To check just run `python --version`; also check if python3 is installed `python3 --version`. If python3 says something like "command not found" you'll need to run the first apt-get command--if it is installed just run the last two. So run the following commands as root (e.g. first run `sudo su -` to become root) . . . 
+The first items are the **OS** level stuff. `sudo` is used to run stuff as "root"--you're essentially installing items the will go into system wide directories/usage. It is highly likely that some, if not all, of these are already installed--apt will simply tell you if they are and not do anything. 
 
-```
-apt-get install python3
-apt-get install python-virtualenv python-pip python3-virtualenv python3-pip virtualenv
-apt-get install git gitk ipython3 ipython3-notebook idle3 idle
-```
-After that run the following (still as root):
+I won't be covering any "git" stuff, but you'll likely want it at some point (and gitk is just a nice tool for looking at info for a local git repo). Git doesn't actually require any configuration to work inside a virtual environment--essentially it is like a honey-badger and just doesn't care.
+
+Idle is both an editor and a shell for python. Very handy for doing small stuff and running scripts or playing with code. I will be using it below and it does take a "tweak" to work right with virtual envs.
 
 
 ```
-pip install --upgrade pip
-pip3 install --upgrade pip
-pip install virtualenvwrapper
-pip3 install virtualenvwrapper
-pip3 install jupyter
+sudo apt-get install python3
+sudo apt-get install python-pip python3-pip 
+sudo apt-get install git gitk idle3 idle
 ```
 
-**What is all that?**
-* `pip` and `pip3` are the tools for installing python(2) and python3 packages
-* "virtualenv" items are the core virtual environment tools
-* `git` and `gitk` are for working with git--probably won't touch on git much but you'll likely start to need it
-* ipython3 and ipython3-notebook are used for running "notebooks" (more on that later)
-* `idle` and `idle3` are python editors. There are plenty of options for editors, and any will do, but idle is the "standard" python development environment. Provides an easy way to both edit files and run a python shell/session. 
-* **Pip Commands**
-  * First we just upgrade both pips (it complains if it isn't the latest version)
-  * Then we install virtualenvwrapper
-  * And finally jupyter (for the ipython notebooks)
+Now for the "user" stuff. pip and pip3 install python packages; the "--user" flag installs it to your local user python "stuff". There isn't really any major compelling reason to not install this stuff system wide--but it really doesn't hurt to get into the habit of not installing everything globally.
 
-## Configuration: A bunch of nitty-gritty in a one place
+As a quick side note `pip list` will show all the packages installed both at the OS level and in your user environment. `pip list --user` will list only the items installed in your user environment (they're found at "$HOME/.local"). 
+
+So the commands: First two are just so "pip" won't complain about being up-to-date. Third command is probably not really necessary, but doesn't hurt. Final one we install virtualenv, virtualenvwrapper, and ipython + jupyter for jupyter notebooks. 
+
+We are here mostly to talk about virtualenv/virtualenvwrapper, but, like idle, I'll cover the jupyter notebook set up as well. Mostly because notebooks are widely used, pretty handy, and over all aren't a bad thing to be familiar with.
+
+
+```
+pip install --upgrade pip --user
+pip3 install --upgrade pip --user
+pip install virtualenv virtualenvwrapper --user
+pip3 install virtualenv ipython3 virtualenvwrapper jupyter --user
+```
+
+## Configuration: A bunch of nitty-gritty in one place
 Some of this will simply make things a lot easier when using virtualenvs but some is also a bit of my own personal preference. There are actually any number of ways to work with virtual environments for python--I find virtualenvwrapper to be a huge time saver and makes things pretty simple. I'll explain more of what the configurations are for when we actually hit on them in use.
 
 ### ONE: Edit Idle
@@ -82,6 +82,8 @@ The executables for the two idles (/usr/bin/idle and /usr/bin/idle3) are actuall
 ```
 
 If you don't have a favorite editor you can do this with `sudo idle /usr/bin/idle` and `sudo idle /usr/bin/idle3`. (If you are new to linux you're simply using an editor, which happens to be idle, to edit a file, which just happens to be how the editor is launched. You could do something like `idle guac_recipe.txt` to use idle to create and edit a file named guac_recipe.txt. Ctrl-s Ctrl-q will save and quit idle; or you can use the menu.)
+
+Anyway, these changes are important for running idle in a virtual environment. Rather than using the OS level python they will use the python from your virtual environment. And most importantly idle will be aware of the packages in your environment. 
 
 ### TWO: Create some directories
 As your usual user (i.e. not as root); in your home directory (just type `cd` to get there if you aren't there already) we need to create two directories. So run . . .
