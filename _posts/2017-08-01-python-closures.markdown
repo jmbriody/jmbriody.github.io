@@ -10,8 +10,6 @@ I'm not going to say closures are simple--if you come from an object oriented ba
 
 You could probably get away with writing a ton of code in python without ever using a closure--but they can be a great tool to make your code simpler, more useful, and easier to extend and maintain. I don't think you'd survive reading or writing Java Script without closures. I'm going to, however, focus on python.
 
-**WEB SERVERS as over eager puppy dog--just fetches anything**
-
 $$
 \begin{align*}
   & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
